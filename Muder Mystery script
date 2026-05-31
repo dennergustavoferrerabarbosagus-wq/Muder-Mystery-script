@@ -101,8 +101,8 @@ end
 ---------------------------------------------------------
 local keyFrame = Instance.new("Frame")
 keyFrame.Parent = keyGui
-keyFrame.Size = UDim2.new(0,320,0,240) -- Aumentado para caber o novo botão
-keyFrame.Position = UDim2.new(0.5,-160,0.5,-120)
+keyFrame.Size = UDim2.new(0,320,0,190)
+keyFrame.Position = UDim2.new(0.5,-160,0.5,-95)
 keyFrame.BackgroundColor3 = bgColor
 keyFrame.Active = true
 keyFrame.Draggable = true
@@ -142,17 +142,6 @@ keyBtn.TextColor3 = Color3.new(1,1,1)
 keyBtn.Font = defaultFont
 keyBtn.TextSize = 14
 ApplyRoundedCorners(keyBtn,6)
-
-local getKeyBtn = Instance.new("TextButton")
-getKeyBtn.Parent = keyFrame
-getKeyBtn.Size = UDim2.new(0.85,0,0,45)
-getKeyBtn.Position = UDim2.new(0.075,0,0,175)
-getKeyBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
-getKeyBtn.Text = "PEGAR KEY"
-getKeyBtn.TextColor3 = Color3.fromRGB(20, 20, 20)
-getKeyBtn.Font = defaultFont
-getKeyBtn.TextSize = 14
-ApplyRoundedCorners(getKeyBtn,6)
 
 ---------------------------------------------------------
 -- SCRIPT PRINCIPAL (ABRE APÓS COLOCAR A KEY)
@@ -484,4 +473,17 @@ local function iniciarScript()
 
     tpMurderBtn.MouseButton1Click:Connect(function() teleportarPara("ASSASSINO") end)
     tpSheriffBtn.MouseButton1Click:Connect(function() teleportarPara("XERIFE") end)
-    tpInnocentBtn.MouseButton1Click:Connect(function() teleportarIn
+    tpInnocentBtn.MouseButton1Click:Connect(function() teleportarInocente() end)
+    gunBtn.MouseButton1Click:Connect(function() pegarGunDrop() end)
+
+    task.spawn(function()
+        while task.wait(0.15) do
+            if ESP_ATIVO then pcall(function() atualizarESP() end) end
+        end
+    end)
+end
+
+---------------------------------------------------------
+-- VERIFICAÇÃO DA KEY
+---------------------------------------------------------
+keyBtn.MouseButton1Click:Connect(function()
