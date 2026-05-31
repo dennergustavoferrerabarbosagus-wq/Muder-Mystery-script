@@ -1,25 +1,76 @@
 ---------------------------------------------------------
--- CHAVE DE ACESSO
+-- CHAVES DE ACESSO
 ---------------------------------------------------------
-local KEY_CORRETA = "keysdodeltadc"
+local chavesValidas = {
+    ["8F9D-2K4P-L1Q7-X5V3"] = true, ["T3N8-C6M2-B9Y4-R1W0"] = true, ["J7H5-D2G9-P4C1-F8Z6"] = true,
+    ["M1L6-W8R3-K5T0-N2B7"] = true, ["V9X4-Q7F2-Y1M6-H3D8"] = true, ["4A2C-9E5G-7J3L-8N6P"] = true,
+    ["U1W3-O8Q5-S2U9-X4Z7"] = true, ["6B8D-1F3H-5K7M-9P2R"] = true, ["C4V6-E1X8-G3Z5-I9A2"] = true,
+    ["K7N9-M2P4-O6R8-Q1T3"] = true, ["Y5B7-A9D1-C2F4-E8H6"] = true, ["S3U5-W7Y9-B1A4-D6C8"] = true,
+    ["H2J4-L6N8-P1R3-T5V7"] = true, ["Z8E1-X3G5-V7I9-T2K4"] = true, ["R5M7-P9O1-N4Q6-L8S2"] = true,
+    ["F1H3-D5J7-B9L2-A4N6"] = true, ["Q6S8-U1W3-Y5B7-A9C2"] = true, ["E3G5-I7K9-M2O4-Q6S8"] = true,
+    ["9A1C-3E5G-7I9K-2M4O"] = true, ["W4Y6-A8C1-E3G5-I7K9"] = true, ["7X9Z-2B4D-6F8H-1J3L"] = true,
+    ["N5P7-R9T1-V3X5-Z8B2"] = true, ["G1I3-K5M7-O9Q2-S4U6"] = true, ["L8N1-P3R5-T7V9-X2Z4"] = true,
+    ["B6D8-F1H3-J5L7-N9P2"] = true, ["5Q7S-9U1W-3Y5A-8C2E"] = true, ["V2X4-Z6B8-D1F3-H5J7"] = true,
+    ["3K5M-7O9Q-1S3U-5W8Y"] = true, ["I9K2-M4O6-Q8S1-U3W5"] = true, ["D4F6-H8J1-L3N5-P7R9"] = true,
+    ["8T1V-3X5Z-7B9D-2F4H"] = true, ["O6Q8-S1U3-W5Y7-A9C2"] = true, ["2J4L-6N8P-1R3T-5V7X"] = true,
+    ["M9O2-Q4S6-U8W1-Y3A5"] = true, ["6C8E-1G3I-5K7M-9O2Q"] = true, ["W3Y5-A7C9-E2G4-I6K8"] = true,
+    ["4S6U-8W1Y-3A5C-7E9G"] = true, ["K1M3-O5Q7-S9U2-W4Y6"] = true, ["9F2H-4J6L-8N1P-3R5T"] = true,
+    ["Z5B7-D9F2-H4J6-L8N1"] = true, ["7P9R-2T4V-6X8Z-1B3D"] = true, ["E4G6-I8K1-M3O5-Q7S9"] = true,
+    ["1U3W-5Y7A-9C2E-4G6I"] = true, ["R8T1-V3X5-Z7B9-D2F4"] = true, ["5H7J-9L2N-4P6R-8T1V"] = true,
+    ["B2D4-F6H8-J1L3-N5P7"] = true, ["3X5Z-7B9D-2F4H-6J8L"] = true, ["N9P2-R4T6-V8X1-Z3B5"] = true,
+    ["8M1O-3Q5S-7U9W-2Y4A"] = true, ["F6H8-J1L3-N5P7-R9T2"] = true, ["2C4E-6G8I-1K3M-5O7Q"] = true,
+    ["T7V9-X2Z4-B6D8-F1H3"] = true, ["9L2N-4P6R-8T1V-3X5Z"] = true, ["A5C7-E9G2-I4K6-M8O1"] = true,
+    ["6Q8S-1U3W-5Y7A-9C2E"] = true, ["Y3A5-C7E9-G2I4-K6M8"] = true, ["4J6L-8N1P-3R5T-7V9X"] = true,
+    ["O1Q3-S5U7-W9Y2-A4C6"] = true, ["7F9H-2J4L-6N8P-1R3T"] = true, ["W8Y1-A3C5-E7G9-I2K4"] = true,
+    ["1M3O-5Q7S-9U2W-4Y6A"] = true, ["S6U8-W1Y3-A5C7-E9G2"] = true, ["5B7D-9F2H-4J6L-8N1P"] = true,
+    ["K2M4-O6Q8-S1U3-W5Y7"] = true, ["8P1R-3T5V-7X9Z-2B4D"] = true, ["D9F2-H4J6-L8N1-P3R5"] = true,
+    ["3U5W-7Y9A-2C4E-6G8I"] = true, ["M7O9-Q2S4-U6W8-Y1A3"] = true, ["9E2G-4I6K-8M1O-3Q5S"] = true,
+    ["V4X6-Z8B1-D3F5-H7J9"] = true, ["6K8M-1O3Q-5S7U-9W2Y"] = true, ["C2E4-G6I8-K1M3-O5Q7"] = true,
+    ["2R4T-6V8X-1Z3B-5D7F"] = true, ["I5K7-M9O2-Q4S6-U8W1"] = true, ["7A9C-2E4G-6I8K-1M3O"] = true,
+    ["X1Z3-B5D7-F9H2-J4L6"] = true, ["4G6I-8K1M-3O5Q-7S9U"] = true, ["Q9S2-U4W6-Y8A1-C3E5"] = true,
+    ["1N3P-5R7T-9V2X-4Z6B"] = true, ["U8W1-Y3A5-C7E9-G2I4"] = true, ["5D7F-9H2J-4L6N-8P1R"] = true,
+    ["J3L5-N7P9-R2T4-V6X8"] = true, ["8Z1B-3D5F-7H9J-2L4N"] = true, ["F2H4-J6L8-N1P3-R5T7"] = true,
+    ["3T5V-7X9Z-2B4D-6F8H"] = true, ["L9N2-P4R6-T8V1-X3Z5"] = true, ["9C2E-4G6I-8K1M-3O5Q"] = true,
+    ["P6R8-T1V3-X5Z7-B9D2"] = true, ["6I8K-1M3O-5Q7S-9U2W"] = true, ["A1C3-E5G7-I9K2-M4O6"] = true,
+    ["2W4Y-6A8C-1E3G-5I7K"] = true, ["G8I1-K3M5-O7Q9-S2U4"] = true, ["7B9D-2F4H-6J8L-1N3P"] = true,
+    ["X5Z7-B9D2-F4H6-J8L1"] = true, ["4R6T-8V1X-3Z5B-7D9F"] = true, ["N1P3-R5T7-V9X2-Z4B6"] = true,
+    ["1H3J-5L7N-9P2R-4T6V"] = true, ["T9V2-X4Z6-B8D1-F3H5"] = true, ["5Y7A-9C2E-4G6I-8K1M"] = true,
+    ["K4M6-O8Q1-S3U5-W7Y9"] = true
+}
 
+-- Função para achar o local mais seguro para injetar a GUI dependendo do executor
+local function obterDestinoSeguro()
+    if gethui then 
+        return gethui() 
+    end
+    local sucesso, coreGui = pcall(function() return game:GetService("CoreGui") end)
+    if sucesso and coreGui then 
+        return coreGui 
+    end
+    return game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+end
+
+local destinoInterface = obterDestinoSeguro()
+
+-- Remove versões antigas para não duplicar na tela
 pcall(function()
-    local old = game.CoreGui:FindFirstChild("MenuMM2")
-    if old then
-        old:Destroy()
+    local antigo = destinoInterface:FindFirstChild("MenuMM2")
+    if antigo then
+        antigo:Destroy()
     end
 end)
 
 ---------------------------------------------------------
--- GUI
+-- GUI PRINCIPAL
 ---------------------------------------------------------
 local keyGui = Instance.new("ScreenGui")
 keyGui.Name = "MenuMM2"
 keyGui.ResetOnSpawn = false
-keyGui.Parent = game.CoreGui
+keyGui.Enabled = true
+keyGui.Parent = destinoInterface
 
 ---------------------------------------------------------
--- CORES
+-- CORES E FONTES
 ---------------------------------------------------------
 local bgColor = Color3.fromRGB(25,20,30)
 local elementBgColor = Color3.fromRGB(40,32,45)
@@ -30,7 +81,7 @@ local errorColor = Color3.fromRGB(200,50,50)
 local defaultFont = Enum.Font.GothamBold
 
 ---------------------------------------------------------
--- VISUAL
+-- FUNÇÕES VISUAIS
 ---------------------------------------------------------
 local function ApplyRoundedCorners(instance, radius)
     local corner = Instance.new("UICorner")
@@ -46,15 +97,16 @@ local function ApplyStroke(instance, color, thickness)
 end
 
 ---------------------------------------------------------
--- KEY FRAME
+-- SINAL DE ACESSO (KEY FRAME)
 ---------------------------------------------------------
 local keyFrame = Instance.new("Frame")
 keyFrame.Parent = keyGui
-keyFrame.Size = UDim2.new(0,320,0,190)
-keyFrame.Position = UDim2.new(0.5,-160,0.5,-95)
+keyFrame.Size = UDim2.new(0,320,0,240) -- Aumentado para caber o novo botão
+keyFrame.Position = UDim2.new(0.5,-160,0.5,-120)
 keyFrame.BackgroundColor3 = bgColor
 keyFrame.Active = true
 keyFrame.Draggable = true
+keyFrame.Visible = true
 ApplyRoundedCorners(keyFrame,10)
 ApplyStroke(keyFrame,primaryColor,1)
 
@@ -91,21 +143,27 @@ keyBtn.Font = defaultFont
 keyBtn.TextSize = 14
 ApplyRoundedCorners(keyBtn,6)
 
+local getKeyBtn = Instance.new("TextButton")
+getKeyBtn.Parent = keyFrame
+getKeyBtn.Size = UDim2.new(0.85,0,0,45)
+getKeyBtn.Position = UDim2.new(0.075,0,0,175)
+getKeyBtn.BackgroundColor3 = Color3.fromRGB(255, 200, 0)
+getKeyBtn.Text = "PEGAR KEY"
+getKeyBtn.TextColor3 = Color3.fromRGB(20, 20, 20)
+getKeyBtn.Font = defaultFont
+getKeyBtn.TextSize = 14
+ApplyRoundedCorners(getKeyBtn,6)
+
 ---------------------------------------------------------
--- SCRIPT PRINCIPAL
+-- SCRIPT PRINCIPAL (ABRE APÓS COLOCAR A KEY)
 ---------------------------------------------------------
 local function iniciarScript()
-
     keyFrame:Destroy()
 
-    ---------------------------------------------------------
-    -- CONFIGS
-    ---------------------------------------------------------
     local ESP_ATIVO = false
     local AIMBOT_ATIVO = false
     local TP_MENU_ABERTO = false
     local COIN_FARM = false
-
     local PREDICAO = 0.15
 
     local Players = game:GetService("Players")
@@ -114,7 +172,7 @@ local function iniciarScript()
     local LocalPlayer = Players.LocalPlayer
 
     ---------------------------------------------------------
-    -- BOTÃO MENU
+    -- BOTÃO PARA ENCOLHER/MOSTRAR MENU
     ---------------------------------------------------------
     local toggleBtn = Instance.new("TextButton")
     toggleBtn.Parent = keyGui
@@ -125,11 +183,12 @@ local function iniciarScript()
     toggleBtn.Font = defaultFont
     toggleBtn.TextSize = 14
     toggleBtn.Text = "OCULTAR MENU"
+    toggleBtn.Visible = true
     ApplyRoundedCorners(toggleBtn,8)
     ApplyStroke(toggleBtn,primaryColor,1)
 
     ---------------------------------------------------------
-    -- MENU PRINCIPAL
+    -- HUB PRINCIPAL
     ---------------------------------------------------------
     local frame = Instance.new("Frame")
     frame.Parent = keyGui
@@ -138,19 +197,15 @@ local function iniciarScript()
     frame.BackgroundColor3 = bgColor
     frame.Active = true
     frame.Draggable = true
+    frame.Visible = true
     ApplyRoundedCorners(frame,10)
     ApplyStroke(frame,primaryColor,1)
 
     toggleBtn.MouseButton1Click:Connect(function()
         frame.Visible = not frame.Visible
-        toggleBtn.Text =
-        frame.Visible and "OCULTAR MENU"
-        or "MOSTRAR MENU"
+        toggleBtn.Text = frame.Visible and "OCULTAR MENU" or "MOSTRAR MENU"
     end)
 
-    ---------------------------------------------------------
-    -- TÍTULO
-    ---------------------------------------------------------
     local title = Instance.new("TextLabel")
     title.Parent = frame
     title.Size = UDim2.new(1,0,0,50)
@@ -160,9 +215,6 @@ local function iniciarScript()
     title.Font = defaultFont
     title.TextSize = 20
 
-    ---------------------------------------------------------
-    -- ESP
-    ---------------------------------------------------------
     local espBtn = Instance.new("TextButton")
     espBtn.Parent = frame
     espBtn.Size = UDim2.new(0.85,0,0,45)
@@ -174,9 +226,6 @@ local function iniciarScript()
     espBtn.TextSize = 14
     ApplyRoundedCorners(espBtn,6)
 
-    ---------------------------------------------------------
-    -- AIMBOT
-    ---------------------------------------------------------
     local aimBtn = Instance.new("TextButton")
     aimBtn.Parent = frame
     aimBtn.Size = UDim2.new(0.85,0,0,45)
@@ -188,9 +237,6 @@ local function iniciarScript()
     aimBtn.TextSize = 14
     ApplyRoundedCorners(aimBtn,6)
 
-    ---------------------------------------------------------
-    -- COIN FARM
-    ---------------------------------------------------------
     local coinBtn = Instance.new("TextButton")
     coinBtn.Parent = frame
     coinBtn.Size = UDim2.new(0.85,0,0,45)
@@ -202,9 +248,6 @@ local function iniciarScript()
     coinBtn.TextSize = 13
     ApplyRoundedCorners(coinBtn,6)
 
-    ---------------------------------------------------------
-    -- MENU TP
-    ---------------------------------------------------------
     local tpMenuBtn = Instance.new("TextButton")
     tpMenuBtn.Parent = frame
     tpMenuBtn.Size = UDim2.new(0.85,0,0,45)
@@ -217,7 +260,7 @@ local function iniciarScript()
     ApplyRoundedCorners(tpMenuBtn,6)
 
     ---------------------------------------------------------
-    -- MENU TELEPORT
+    -- MENU TELEPORTES
     ---------------------------------------------------------
     local tpFrame = Instance.new("Frame")
     tpFrame.Parent = keyGui
@@ -239,11 +282,7 @@ local function iniciarScript()
     tpTitle.Font = defaultFont
     tpTitle.TextSize = 14
 
-    ---------------------------------------------------------
-    -- BOTÕES TP
-    ---------------------------------------------------------
     local function CreateTPButton(yPos,text,color)
-
         local btn = Instance.new("TextButton")
         btn.Parent = tpFrame
         btn.Size = UDim2.new(0.85,0,0,35)
@@ -253,224 +292,105 @@ local function iniciarScript()
         btn.TextColor3 = color
         btn.Font = defaultFont
         btn.TextSize = 13
-
         ApplyRoundedCorners(btn,6)
-
         return btn
     end
 
-    local tpMurderBtn =
-    CreateTPButton(
-        50,
-        "TP ASSASSINO",
-        Color3.fromRGB(255,100,100)
-    )
-
-    local tpSheriffBtn =
-    CreateTPButton(
-        95,
-        "TP XERIFE",
-        Color3.fromRGB(100,150,255)
-    )
-
-    local tpInnocentBtn =
-    CreateTPButton(
-        140,
-        "TP INOCENTE",
-        Color3.fromRGB(100,255,100)
-    )
-
-    local gunBtn =
-    CreateTPButton(
-        185,
-        "PEGAR ARMA",
-        primaryColor
-    )
+    local tpMurderBtn = CreateTPButton(50, "TP ASSASSINO", Color3.fromRGB(255,100,100))
+    local tpSheriffBtn = CreateTPButton(95, "TP XERIFE", Color3.fromRGB(100,150,255))
+    local tpInnocentBtn = CreateTPButton(140, "TP INOCENTE", Color3.fromRGB(100,255,100))
+    local gunBtn = CreateTPButton(185, "PEGAR ARMA", primaryColor)
 
     ---------------------------------------------------------
-    -- PEGAR PAPEL
+    -- LOGICA INTERNA DO JOGO (ROLES, ESP, AIMBOT, FARM)
     ---------------------------------------------------------
     local function pegarPapel(jogador)
-
         local papel = "INOCENTE"
-
         local function checarItens(pasta)
-
             if not pasta then return end
-
             for _, item in pairs(pasta:GetChildren()) do
-
                 if item:IsA("Tool") then
-
-                    local nome =
-                    string.lower(item.Name)
-
-                    if string.find(nome,"knife")
-                    or string.find(nome,"faca") then
-
+                    local nome = string.lower(item.Name)
+                    if string.find(nome,"knife") or string.find(nome,"faca") then
                         papel = "ASSASSINO"
-
-                    elseif string.find(nome,"gun")
-                    or string.find(nome,"revolver") then
-
-                        if papel ~= "ASSASSINO" then
-                            papel = "XERIFE"
-                        end
+                    elseif string.find(nome,"gun") or string.find(nome,"revolver") then
+                        if papel ~= "ASSASSINO" then papel = "XERIFE" end
                     end
                 end
             end
         end
-
         checarItens(jogador.Backpack)
-
-        if jogador.Character then
-            checarItens(jogador.Character)
-        end
-
+        if jogador.Character then checarItens(jogador.Character) end
         return papel
     end
 
-    ---------------------------------------------------------
-    -- ESP
-    ---------------------------------------------------------
     local function limparESP()
-
         for _, jogador in pairs(Players:GetPlayers()) do
-
             if jogador.Character then
-
-                local h =
-                jogador.Character:FindFirstChild("ESPHighlight")
-
-                if h then
-                    h:Destroy()
-                end
+                local h = jogador.Character:FindFirstChild("ESPHighlight")
+                if h then h:Destroy() end
             end
         end
     end
 
     local function atualizarESP()
-
         for _, jogador in pairs(Players:GetPlayers()) do
-
-            if jogador ~= LocalPlayer
-            and jogador.Character
-            and jogador.Character:FindFirstChild("HumanoidRootPart") then
-
+            if jogador ~= LocalPlayer and jogador.Character and jogador.Character:FindFirstChild("HumanoidRootPart") then
                 local papel = pegarPapel(jogador)
-
                 local cor = Color3.fromRGB(0,255,0)
 
-                if papel == "ASSASSINO" then
-                    cor = Color3.fromRGB(255,0,0)
-                elseif papel == "XERIFE" then
-                    cor = Color3.fromRGB(0,0,255)
-                end
+                if papel == "ASSASSINO" then cor = Color3.fromRGB(255,0,0)
+                elseif papel == "XERIFE" then cor = Color3.fromRGB(0,0,255) end
 
-                local highlight =
-                jogador.Character:FindFirstChild("ESPHighlight")
-
+                local highlight = jogador.Character:FindFirstChild("ESPHighlight")
                 if not highlight then
-
                     highlight = Instance.new("Highlight")
                     highlight.Name = "ESPHighlight"
                     highlight.Parent = jogador.Character
                     highlight.FillTransparency = 0.5
                     highlight.OutlineTransparency = 0
                 end
-
                 highlight.FillColor = cor
                 highlight.OutlineColor = cor
             end
         end
     end
 
-    ---------------------------------------------------------
-    -- AIMBOT
-    ---------------------------------------------------------
     local function pegarAssassino()
-
         for _, jogador in pairs(Players:GetPlayers()) do
-
-            if jogador ~= LocalPlayer
-            and jogador.Character
-            and jogador.Character:FindFirstChild("Head")
-            and jogador.Character:FindFirstChild("HumanoidRootPart") then
-
-                if pegarPapel(jogador) == "ASSASSINO" then
-                    return jogador
-                end
+            if jogador ~= LocalPlayer and jogador.Character and jogador.Character:FindFirstChild("Head") and jogador.Character:FindFirstChild("HumanoidRootPart") then
+                if pegarPapel(jogador) == "ASSASSINO" then return jogador end
             end
         end
-
         return nil
     end
 
     RunService.RenderStepped:Connect(function()
-
-        if not AIMBOT_ATIVO then
-            return
-        end
-
+        if not AIMBOT_ATIVO then return end
         local assassino = pegarAssassino()
-
         if assassino then
-
-            local head =
-            assassino.Character.Head
-
-            local hrp =
-            assassino.Character.HumanoidRootPart
-
-            local velocidade =
-            hrp.AssemblyLinearVelocity
-
-            local posicao =
-            head.Position + (velocidade * PREDICAO)
-
-            Camera.CFrame =
-            CFrame.new(
-                Camera.CFrame.Position,
-                posicao
-            )
+            local head = assassino.Character.Head
+            local hrp = assassino.Character.HumanoidRootPart
+            local velocidade = hrp.AssemblyLinearVelocity
+            local posicao = head.Position + (velocidade * PREDICAO)
+            Camera.CFrame = CFrame.new(Camera.CFrame.Position, posicao)
         end
     end)
 
-    ---------------------------------------------------------
-    -- AUTO MOEDAS
-    ---------------------------------------------------------
     task.spawn(function()
-
         while task.wait(2) do
-
             if COIN_FARM then
-
                 pcall(function()
-
-                    local character =
-                    LocalPlayer.Character
-
+                    local character = LocalPlayer.Character
                     if not character then return end
-
-                    local hrp =
-                    character:FindFirstChild("HumanoidRootPart")
-
+                    local hrp = character:FindFirstChild("HumanoidRootPart")
                     if not hrp then return end
 
                     for _, obj in pairs(workspace:GetDescendants()) do
-
-                        local nome =
-                        string.lower(obj.Name)
-
-                        if nome == "coin"
-                        or nome == "coins"
-                        or string.find(nome,"coin") then
-
+                        local nome = string.lower(obj.Name)
+                        if nome == "coin" or nome == "coins" or string.find(nome,"coin") then
                             if obj:IsA("BasePart") then
-
-                                hrp.CFrame =
-                                obj.CFrame + Vector3.new(0,2,0)
-
+                                hrp.CFrame = obj.CFrame + Vector3.new(0,2,0)
                                 break
                             end
                         end
@@ -480,30 +400,12 @@ local function iniciarScript()
         end
     end)
 
-    ---------------------------------------------------------
-    -- TELEPORTES
-    ---------------------------------------------------------
     local function teleportarPara(tipo)
-
         for _, jogador in pairs(Players:GetPlayers()) do
-
-            if jogador ~= LocalPlayer
-            and jogador.Character
-            and jogador.Character:FindFirstChild("HumanoidRootPart") then
-
+            if jogador ~= LocalPlayer and jogador.Character and jogador.Character:FindFirstChild("HumanoidRootPart") then
                 if pegarPapel(jogador) == tipo then
-
-                    local hrp =
-                    LocalPlayer.Character and
-                    LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-
-                    if hrp then
-
-                        hrp.CFrame =
-                        jogador.Character.HumanoidRootPart.CFrame
-                        * CFrame.new(2,0,2)
-                    end
-
+                    local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+                    if hrp then hrp.CFrame = jogador.Character.HumanoidRootPart.CFrame * CFrame.new(2,0,2) end
                     break
                 end
             end
@@ -511,185 +413,75 @@ local function iniciarScript()
     end
 
     local function teleportarInocente()
-
         local inocentes = {}
-
         for _, jogador in pairs(Players:GetPlayers()) do
-
-            if jogador ~= LocalPlayer
-            and jogador.Character
-            and jogador.Character:FindFirstChild("HumanoidRootPart") then
-
-                if pegarPapel(jogador) == "INOCENTE" then
-                    table.insert(inocentes,jogador)
-                end
+            if jogador ~= LocalPlayer and jogador.Character and jogador.Character:FindFirstChild("HumanoidRootPart") then
+                if pegarPapel(jogador) == "INOCENTE" then table.insert(inocentes,jogador) end
             end
         end
-
         if #inocentes > 0 then
-
-            local escolhido =
-            inocentes[math.random(1,#inocentes)]
-
-            local hrp =
-            LocalPlayer.Character and
-            LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
-
-            if hrp then
-
-                hrp.CFrame =
-                escolhido.Character.HumanoidRootPart.CFrame
-                * CFrame.new(2,0,2)
-            end
+            local escolhido = inocentes[math.random(1,#inocentes)]
+            local hrp = LocalPlayer.Character and LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then hrp.CFrame = escolhido.Character.HumanoidRootPart.CFrame * CFrame.new(2,0,2) end
         end
     end
 
     local function pegarGunDrop()
-
-        local character = LocalPlayer.Character
-        if not character then return end
-
-        local hrp =
-        character:FindFirstChild("HumanoidRootPart")
-
+        local character = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+        local hrp = character:FindFirstChild("HumanoidRootPart")
         if not hrp then return end
-
         local oldPos = hrp.CFrame
-
-        local gunDrop =
-        workspace:FindFirstChild("GunDrop", true)
-
+        local gunDrop = workspace:FindFirstChild("GunDrop", true)
         if gunDrop then
-
-            hrp.CFrame =
-            gunDrop.CFrame + Vector3.new(0,2,0)
-
+            hrp.CFrame = gunDrop.CFrame + Vector3.new(0,2,0)
             task.wait(0.5)
-
             hrp.CFrame = oldPos
         end
     end
 
     ---------------------------------------------------------
-    -- BOTÕES
+    -- CONEXÕES DOS BOTÕES DO HUB
     ---------------------------------------------------------
     espBtn.MouseButton1Click:Connect(function()
-
         ESP_ATIVO = not ESP_ATIVO
-
         if ESP_ATIVO then
-
             espBtn.Text = "ESP: ATIVADO"
             espBtn.BackgroundColor3 = primaryColor
-
         else
-
             espBtn.Text = "ESP: DESATIVADO"
             espBtn.BackgroundColor3 = elementBgColor
-
             limparESP()
         end
     end)
 
     aimBtn.MouseButton1Click:Connect(function()
-
         AIMBOT_ATIVO = not AIMBOT_ATIVO
-
         if AIMBOT_ATIVO then
-
             aimBtn.Text = "AIMBOT: ATIVADO"
             aimBtn.BackgroundColor3 = primaryColor
-
         else
-
             aimBtn.Text = "AIMBOT: DESATIVADO"
             aimBtn.BackgroundColor3 = elementBgColor
         end
     end)
 
     coinBtn.MouseButton1Click:Connect(function()
-
         COIN_FARM = not COIN_FARM
-
         if COIN_FARM then
-
             coinBtn.Text = "AUTO MOEDAS: ATIVADO"
             coinBtn.BackgroundColor3 = primaryColor
-
         else
-
             coinBtn.Text = "AUTO MOEDAS: DESATIVADO"
             coinBtn.BackgroundColor3 = elementBgColor
         end
     end)
 
     tpMenuBtn.MouseButton1Click:Connect(function()
-
         TP_MENU_ABERTO = not TP_MENU_ABERTO
-
         tpFrame.Visible = TP_MENU_ABERTO
-
-        tpMenuBtn.Text =
-        TP_MENU_ABERTO
-        and "FECHAR MENU TELEPORT"
-        or "ABRIR MENU TELEPORT"
+        tpMenuBtn.Text = TP_MENU_ABERTO and "FECHAR MENU TELEPORT" or "ABRIR MENU TELEPORT"
     end)
 
-    tpMurderBtn.MouseButton1Click:Connect(function()
-        teleportarPara("ASSASSINO")
-    end)
-
-    tpSheriffBtn.MouseButton1Click:Connect(function()
-        teleportarPara("XERIFE")
-    end)
-
-    tpInnocentBtn.MouseButton1Click:Connect(function()
-        teleportarInocente()
-    end)
-
-    gunBtn.MouseButton1Click:Connect(function()
-        pegarGunDrop()
-    end)
-
-    ---------------------------------------------------------
-    -- LOOP ESP
-    ---------------------------------------------------------
-    task.spawn(function()
-
-        while task.wait(0.15) do
-
-            if ESP_ATIVO then
-
-                pcall(function()
-                    atualizarESP()
-                end)
-            end
-        end
-    end)
-end
-
----------------------------------------------------------
--- VERIFICAR CHAVE
----------------------------------------------------------
-keyBtn.MouseButton1Click:Connect(function()
-
-    if keyBox.Text == KEY_CORRETA then
-
-        keyBtn.Text = "CHAVE CORRETA!"
-        keyBtn.BackgroundColor3 = successColor
-
-        task.wait(1)
-
-        iniciarScript()
-
-    else
-
-        keyBtn.Text = "CHAVE INVÁLIDA"
-        keyBtn.BackgroundColor3 = errorColor
-
-        task.wait(1)
-
-        keyBtn.Text = "ACESSAR SCRIPT"
-        keyBtn.BackgroundColor3 = primaryColor
-    end
-end)
+    tpMurderBtn.MouseButton1Click:Connect(function() teleportarPara("ASSASSINO") end)
+    tpSheriffBtn.MouseButton1Click:Connect(function() teleportarPara("XERIFE") end)
+    tpInnocentBtn.MouseButton1Click:Connect(function() teleportarIn
